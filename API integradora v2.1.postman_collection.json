@@ -1,0 +1,683 @@
+{
+	"info": {
+		"_postman_id": "60148734-9ed5-4f1a-a6c8-78edb279ae76",
+		"name": "API integradora",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30630043"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Registrar usuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Diego",
+									"type": "text"
+								},
+								{
+									"key": "apellido_p",
+									"value": "Ramirez",
+									"type": "text"
+								},
+								{
+									"key": "apellido_m",
+									"value": "Tome",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ContraseñaSegura123!",
+									"type": "text"
+								},
+								{
+									"key": "telefono",
+									"value": "2481287354",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "diegoramireztome@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualiza Usuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 10|V6A11hgulTlri0ffPLN6CUyhKjAX7YPkZU47YJOL19a95d6f",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "6|xrr108q3gwDvFhFjm2wX1Q69nD4tUyr1tr8NkVHj39e766f6",
+									"type": "text"
+								},
+								{
+									"key": "telefono",
+									"value": "2481287354",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "diegoramireztome1@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "rol",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/update-user",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"update-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 11|ghVuW9ohdcGGr8QWYgosB8uJLEEhYdbG8kToNOds810fecde",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numero_autobus\": \"AB123\",\r\n    \"linea\": \"Linea Roja\",\r\n    \"capacidad\": 50,\r\n    \"servicios\": \"WiFi, TV\",\r\n    \"num_incidencia\": 0\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/logout?token=4|OePMnj8AKLNPfBreOwHtFu8xALqob1rszowJR8QB2e8978c6",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"logout"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "4|OePMnj8AKLNPfBreOwHtFu8xALqob1rszowJR8QB2e8978c6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "diegoramireztome@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ContraseñaSegura123!",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Boletos",
+			"item": [
+				{
+					"name": "Comprar Boletos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"14|0y1NtohxqQ7YccoPI0tVeKEtjkpPuwomZpQAT1Rw61883bb9\",\r\n    \"id_corrida\": 2,\r\n    \"asientos\": [10]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/comprar-boleto",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"comprar-boleto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Visualiza boletos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "14|0y1NtohxqQ7YccoPI0tVeKEtjkpPuwomZpQAT1Rw61883bb9",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/visualizar-boletos",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"visualizar-boletos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancelar Boleto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "14|0y1NtohxqQ7YccoPI0tVeKEtjkpPuwomZpQAT1Rw61883bb9",
+									"type": "text"
+								},
+								{
+									"key": "id_boleto",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/cancelar-boleto",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"cancelar-boleto"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Autobuses",
+			"item": [
+				{
+					"name": "Actualiza Autobus",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "numero_autobus",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "linea",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "capacidad",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "servicios",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/autobuses/update",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"autobuses",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crea Autobus",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "13|WaeCONr8cIp1KKBeeuqrrT5ijI3sUcQllQR0uoxn65b90b53",
+									"type": "text"
+								},
+								{
+									"key": "numero_autobus",
+									"value": "ABC1234",
+									"type": "text"
+								},
+								{
+									"key": "linea",
+									"value": "AU",
+									"type": "text"
+								},
+								{
+									"key": "capacidad",
+									"value": "20",
+									"type": "text"
+								},
+								{
+									"key": "servicios",
+									"value": "Baños, WI-FI",
+									"type": "text"
+								},
+								{
+									"key": "num_incidencia",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/autobus/create",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"autobus",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vizualizar autobus",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/autobus/view",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"autobus",
+								"view"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Elimina Autobus",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/autobus/delete",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"autobus",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Corrida",
+			"item": [
+				{
+					"name": "Crea Corridas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"13|WaeCONr8cIp1KKBeeuqrrT5ijI3sUcQllQR0uoxn65b90b53\",\r\n    \"id_autobus\": 9,\r\n    \"origen\": \"Ciudad A\",\r\n    \"destino\": \"Ciudad B\",\r\n    \"fecha\": \"2024-11-25\",\r\n    \"hora_salida\": \"08:00\",\r\n    \"hora_estima_llegada\": \"12:00\",\r\n    \"tipo_corrida\": 1,\r\n    \"asientos_totales\": 40,\r\n    \"precio\": 200\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/corrida/create",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"corrida",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualiza Corrida",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "origen",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "destino",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "hora_salida",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "precio ",
+									"value": "",
+									"type": "text"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Elimina Corridas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "",
+									"type": "text"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Visualiza Corrida",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "13|WaeCONr8cIp1KKBeeuqrrT5ijI3sUcQllQR0uoxn65b90b53",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/corrida/view",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"corrida",
+								"view"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

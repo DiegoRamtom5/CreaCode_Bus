@@ -9,6 +9,8 @@ class boleto extends Model
 {
     use HasFactory;
 
+    protected $table = 'boleto';
+
     protected $fillable = [
         'num_boleto',
         'id_usuario',
