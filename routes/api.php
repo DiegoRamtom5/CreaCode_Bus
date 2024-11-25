@@ -30,6 +30,8 @@ Route::post('/registrar-incidente', [IncidenteController::class, 'registrarIncid
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/logout', [UserController::class, 'logout']);
+Route::post('/detallesUsuario', [UserController::class, 'verDetallesUsuario']);
+Route::post('/listaUsuarios', [UserController::class, 'listaUsuarios']);
 
 Route::middleware('validate.token')->group(function () {
     Route::post('/update-user', [UserController::class, 'update']);
