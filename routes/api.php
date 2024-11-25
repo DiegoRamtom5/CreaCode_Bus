@@ -19,6 +19,7 @@ Route::post('/corrida/create', [CorridaController::class, 'create']);
 Route::post('/corrida/update', [CorridaController::class, 'update']);
 Route::post('/corrida/delete', [CorridaController::class, 'delete']);
 Route::post('/corrida/view', [CorridaController::class, 'view']);
+Route::post('/corrida/detalles', [CorridaController::class, 'detallesCorrida']);
 
 
 Route::post('/comprar-boleto', [BoletoController::class, 'comprarBoleto']);
