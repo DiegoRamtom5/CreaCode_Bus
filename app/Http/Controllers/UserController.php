@@ -102,4 +102,35 @@ class UserController extends Controller
         $user->delete();
         return response()->json(['message' => 'Usuario eliminado con éxito']);
     }
+    public function verDetallesUsuario(Request $request)
+{
+    $token = $request->input('token');
+    if (!$this->validateToken($token)) {
+        return response()->json(['message' => 'Token inválido'], 401);
+    }
+
+    $id = $request->input('id'); // ID del usuario a consultar
+    if (!$id) {
+        return response()->json(['message' => 'El ID del usuario es requerido'], 400);
+    }
+
+    $usuario = User::find($id); // Busca al usuario por ID
+    if (!$usuario) {
+        return response()->json(['message' => 'Usuario no encontrado'], 404);
+    }
+
+    return response()->json(['usuario' => $usuario], 200);
+}
+public function listaUsuarios(Request $request)
+{
+    $token = $request->input('token');
+    if (!$this->validateToken($token)) {
+        return response()->json(['message' => 'Token inválido'], 401);
+    }
+
+    $usuarios = User::all(); // Obtiene todos los usuarios
+
+    return response()->json(['usuarios' => $usuarios], 200);
+}
+
 }
