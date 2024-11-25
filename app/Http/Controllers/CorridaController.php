@@ -90,7 +90,27 @@ class CorridaController extends Controller
 
         return response()->json(['corridas' => $corridas]);
     }
-
+    
+    public function detallesCorrida(Request $request)
+    {
+        $token = $request->input('token');
+        if (!$this->validateToken($token)) {
+            return response()->json(['message' => 'Token inválido'], 401);
+        }
+    
+        $id = $request->input('id'); // ID de la corrida a consultar
+        if (!$id) {
+            return response()->json(['message' => 'El ID de la corrida es requerido'], 400);
+        }
+    
+        $corrida = Corrida::find($id); // Busca la corrida por ID
+        if (!$corrida) {
+            return response()->json(['message' => 'Corrida no encontrada'], 404);
+        }
+    
+        return response()->json(['corrida' => $corrida], 200);
+    }
+    
     private function validateToken($token)
     {
         $accessToken = PersonalAccessToken::findToken($token);
