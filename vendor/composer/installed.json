@@ -5468,6 +5468,7 @@
             "install-path": "../sebastian/version"
         },
         {
+<<<<<<< HEAD
             "name": "sendgrid/php-http-client",
             "version": "4.1.1",
             "version_normalized": "4.1.1.0",
@@ -5601,6 +5602,8 @@
             "install-path": "../sendgrid/sendgrid"
         },
         {
+=======
+>>>>>>> 717f4ddc650841113f7d05a08fe768635bab4ccb
             "name": "spatie/backtrace",
             "version": "1.6.3",
             "version_normalized": "1.6.3.0",
@@ -5996,6 +5999,7 @@
             "install-path": "../spatie/laravel-ignition"
         },
         {
+<<<<<<< HEAD
             "name": "starkbank/ecdsa",
             "version": "0.0.5",
             "version_normalized": "0.0.5.0",
@@ -6042,6 +6046,8 @@
             "install-path": "../starkbank/ecdsa"
         },
         {
+=======
+>>>>>>> 717f4ddc650841113f7d05a08fe768635bab4ccb
             "name": "symfony/console",
             "version": "v6.4.15",
             "version_normalized": "6.4.15.0",
