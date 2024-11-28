@@ -11,6 +11,8 @@ use Laravel\Sanctum\PersonalAccessToken;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Events\Verified;
+use App\Notifications\VerifyEmailNotification;
+use Illuminate\Support\Facades\URL;
 
 class UserController extends Controller
 {
@@ -31,11 +33,12 @@ class UserController extends Controller
                 'regex:/^(?!.*(\d)\1{2}).*$/',
             ],
         ]);
-
+    
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-
+    
+        // Crear el usuario sin token
         $user = User::create([
             'name' => $request->name,
             'apellido_p' => $request->apellido_p,
@@ -44,38 +47,44 @@ class UserController extends Controller
             'telefono' => $request->telefono,
             'password' => Hash::make($request->password),
         ]);
-
-         // Dentro del método register
-        event(new Registered($user));  // Esto disparará la notificación de verificación
-
-        return response()->json(['message' => 'Usuario registrado con éxito', 'user' => $user], 201);
+    
+        // Enviar correo de verificación
+        $user->notify(new VerifyEmailNotification());
+    
+        // Emitir el evento de registro
+        event(new Registered($user));
+    
+        return response()->json([
+            'message' => 'Usuario registrado con éxito. Se ha enviado un correo para verificar tu cuenta.',
+            'user' => $user
+        ], 201);
     }
-
+    
     public function verifyEmail($id, $hash)
     {
         // Buscar al usuario por su ID
         $user = User::findOrFail($id);
-
+    
         // Verificar el hash
         if (!hash_equals($hash, sha1($user->getEmailForVerification()))) {
-            // Si el hash no coincide, puedes lanzar un error o redirigir
-            return response()->json(['message' => 'Invalid verification link.'], 400);
+            return response()->json(['message' => 'Enlace de verificación inválido.'], 400);
         }
-
-        // Verificar y marcar el correo como verificado
+    
+        // Verificar si ya está verificado
         if ($user->hasVerifiedEmail()) {
-            return redirect('login.html');  // Redirige a login.html si ya está verificado
+            return response()->json(['message' => 'El correo ya ha sido verificado.'], 200);
         }
-
-        // Marcar como verificado
+    
+        // Marcar el correo como verificado
         $user->markEmailAsVerified();
-
+    
         // Emitir el evento de verificación
         event(new Verified($user));
-
-        // Redirigir a login.html después de la verificación
-        return redirect('login.html');  // Aquí rediriges a login.html
+    
+        return response()->json(['message' => 'Correo verificado exitosamente. Ahora puedes iniciar sesión.'], 200);
     }
+    
+
 
 
     public function registerU(Request $request)

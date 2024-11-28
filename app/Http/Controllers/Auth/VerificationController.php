@@ -10,19 +10,28 @@ class VerificationController extends Controller
 {
     public function verify(Request $request)
     {
+
+            // Depuración
+    return response()->json(['status' => 'Verificación accedida correctamente'], 200);
+
         // Obtiene el usuario con el ID proporcionado en la URL
         $user = User::findOrFail($request->route('id'));
 
-        // Verifica si ya está marcado como verificado
+        // Valida que el hash del enlace coincida con el correo del usuario
+        if (!hash_equals($request->route('hash'), sha1($user->getEmailForVerification()))) {
+            return response()->json(['message' => 'El enlace de verificación no es válido.'], 400);
+        }
+
+        // Verifica si el correo ya está marcado como verificado
         if ($user->hasVerifiedEmail()) {
-            return response()->json(['message' => 'El correo ya está verificado.']);
+            return response()->json(['message' => 'El correo ya ha sido verificado anteriormente.']);
         }
 
         // Marca el correo como verificado
-        if ($user->markEmailAsVerified()) {
-            // Dispara el evento de verificación de correo
-            event(new Verified($user));
-        }
+        $user->markEmailAsVerified();
+
+        // Dispara el evento de verificación de correo
+        event(new Verified($user));
 
         return response()->json(['message' => 'Correo verificado con éxito.']);
     }

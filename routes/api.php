@@ -7,6 +7,7 @@ use App\Http\Controllers\BoletoController;
 use App\Http\Controllers\IncidenteController;
 use App\Http\Controllers\AutobusController;
 use App\Http\Controllers\CorridaController;
+use App\Http\Controllers\Auth\VerificationController;
 
 // Autobuses
 Route::post('/autobus/create', [AutobusController::class, 'create']);
@@ -30,9 +31,17 @@ Route::post('/registrar-incidente', [IncidenteController::class, 'registrarIncid
 // Asegúrate de que no esté dentro de un grupo con autenticación
 Route::post('/register', [UserController::class, 'register'])->withoutMiddleware('auth:sanctum');
 
-Route::get('/verify-email/{id}/{hash}', [UserController::class, 'verifyEmail'])
-    ->withoutMiddleware('auth:sanctum')  // Excluir la autenticación para esta ruta
+
+
+Route::get('/email/verify/{id}/{hash}', [UserController::class, 'verifyEmail'])
+    ->middleware(['signed'])
     ->name('verification.verify');
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+
+
 
 Route::post('/registerU', [UserController::class, 'registerU']);
 Route::post('/login', [UserController::class, 'login']);
