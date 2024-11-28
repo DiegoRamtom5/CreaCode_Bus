@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Sanctum\PersonalAccessToken;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Events\Verified;
 
 class UserController extends Controller
 {
@@ -42,6 +45,72 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+         // Dentro del método register
+        event(new Registered($user));  // Esto disparará la notificación de verificación
+
+        return response()->json(['message' => 'Usuario registrado con éxito', 'user' => $user], 201);
+    }
+
+    public function verifyEmail($id, $hash)
+    {
+        // Buscar al usuario por su ID
+        $user = User::findOrFail($id);
+
+        // Verificar el hash
+        if (!hash_equals($hash, sha1($user->getEmailForVerification()))) {
+            // Si el hash no coincide, puedes lanzar un error o redirigir
+            return response()->json(['message' => 'Invalid verification link.'], 400);
+        }
+
+        // Verificar y marcar el correo como verificado
+        if ($user->hasVerifiedEmail()) {
+            return redirect('login.html');  // Redirige a login.html si ya está verificado
+        }
+
+        // Marcar como verificado
+        $user->markEmailAsVerified();
+
+        // Emitir el evento de verificación
+        event(new Verified($user));
+
+        // Redirigir a login.html después de la verificación
+        return redirect('login.html');  // Aquí rediriges a login.html
+    }
+
+
+    public function registerU(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'apellido_p' => 'required|string|max:255',
+            'apellido_m' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'telefono' => 'required|string|max:15',
+            'password' => [
+                'required',
+                'string',
+                'min:12',
+                'regex:/[A-Z]/',
+                'regex:/[!@#$%^&*(),.?":{}|<>]/',
+                'regex:/^(?!.*(\d)\1{2}).*$/',
+            ],
+            'rol' => 'required|integer',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $user = User::create([
+            'name' => $request->name,
+            'apellido_p' => $request->apellido_p,
+            'apellido_m' => $request->apellido_m,
+            'email' => $request->email,
+            'telefono' => $request->telefono,
+            'password' => Hash::make($request->password),
+            'rol' => $request->rol,
+        ]);
+
         return response()->json(['message' => 'Usuario registrado con éxito', 'user' => $user], 201);
     }
 
@@ -64,6 +133,7 @@ class UserController extends Controller
         return response()->json([
             'message' => 'Inicio de sesión exitoso',
             'token' => $token,
+            'rol' => $user->rol,
         ]);
     }
 
@@ -124,13 +194,27 @@ class UserController extends Controller
 public function listaUsuarios(Request $request)
 {
     $token = $request->input('token');
+    Log::info("Token recibido: " . $token);
+    
     if (!$this->validateToken($token)) {
+        Log::error("Token inválido");
         return response()->json(['message' => 'Token inválido'], 401);
     }
 
-    $usuarios = User::all(); // Obtiene todos los usuarios
+    try {
+        $usuarios = User::all();
+    } catch (\Exception $e) {
+        Log::error("Error al obtener usuarios: " . $e->getMessage());
+        return response()->json(['message' => 'Error interno'], 500);
+    }
 
     return response()->json(['usuarios' => $usuarios], 200);
+}
+
+private function validateToken($token)
+{
+    $accessToken = PersonalAccessToken::findToken($token);
+    return $accessToken && $accessToken->tokenable_type === 'App\Models\User';
 }
 
 }

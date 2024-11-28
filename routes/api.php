@@ -27,7 +27,14 @@ Route::post('/cancelar-boleto', [BoletoController::class, 'cancelarBoleto']);
 Route::post('/visualizar-boletos', [BoletoController::class, 'visualizarBoletos']);
 
 Route::post('/registrar-incidente', [IncidenteController::class, 'registrarIncidente']);
-Route::post('/register', [UserController::class, 'register']);
+// Asegúrate de que no esté dentro de un grupo con autenticación
+Route::post('/register', [UserController::class, 'register'])->withoutMiddleware('auth:sanctum');
+
+Route::get('/verify-email/{id}/{hash}', [UserController::class, 'verifyEmail'])
+    ->withoutMiddleware('auth:sanctum')  // Excluir la autenticación para esta ruta
+    ->name('verification.verify');
+
+Route::post('/registerU', [UserController::class, 'registerU']);
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/detallesUsuario', [UserController::class, 'verDetallesUsuario']);
