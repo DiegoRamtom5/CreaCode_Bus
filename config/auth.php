@@ -16,7 +16,11 @@ return [
     'defaults' => [
         'guard' => 'web',
         'passwords' => 'users',
+        'redirects' => [
+        'login' => '/login',  // Página donde el usuario será redirigido si no está autenticado
+        'home' => '/home',  // Página a la que será redirigido después de loguearse exitosamente
     ],
+],
 
     /*
     |--------------------------------------------------------------------------
@@ -36,11 +40,15 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
     ],
+    'api' => [
+        'driver' => 'sanctum',
+        'provider' => 'users',
+    ],
+],
 
     /*
     |--------------------------------------------------------------------------

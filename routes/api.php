@@ -7,7 +7,9 @@ use App\Http\Controllers\BoletoController;
 use App\Http\Controllers\IncidenteController;
 use App\Http\Controllers\AutobusController;
 use App\Http\Controllers\CorridaController;
-use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\VerificationController;
+//use App\Http\Controllers\VerificationController;
 
 // Autobuses
 Route::post('/autobus/create', [AutobusController::class, 'create']);
@@ -33,12 +35,23 @@ Route::post('/register', [UserController::class, 'register'])->withoutMiddleware
 
 
 
-Route::get('/email/verify/{id}/{hash}', [UserController::class, 'verifyEmail'])
+/*Route::get('/email/verify/{id}/{hash}', [UserController::class, 'verifyEmail'])
     ->middleware(['signed'])
     ->name('verification.verify');
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
+
+// Ruta para verificar el correo (sin autenticación)
+
+Route::get('/verify-email/{id}/{hash}', [VerificationController::class, 'verify'])
+    ->middleware(['auth', 'signed', 'throttle:6,1'])  // Aquí se agrega 'auth'
+    ->name('verification.verify');
+
+// Ruta para reenviar la verificación de correo
+Route::post('/email/resend', [VerificationController::class, 'resend'])
+    ->name('verification.resend');
+
 
 
 
