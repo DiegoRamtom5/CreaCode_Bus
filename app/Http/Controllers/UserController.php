@@ -103,7 +103,6 @@ public function login(Request $request) {
     $request->validate([
         'email' => 'required|email',
         'password' => 'required',
-        'codigo_verificacion' => 'required|numeric',
     ]);
 
     // Buscar el usuario por correo
@@ -118,21 +117,45 @@ public function login(Request $request) {
         return response()->json(['message' => 'Contraseña incorrecta.'], 400);
     }
 
+    $token = $user->createToken('Token')->plainTextToken;
+    return response()->json([
+        'token' => $token,
+        'id' => $user->id,
+        'rol' => $user->rol
+    ]);
+}
+
+public function verificarCorreo(Request $request)
+{
+    $request->validate([
+        'id' => 'required|numeric',
+        'codigo_verificacion' => 'required|numeric',
+    ]);
+
+    // Buscar el usuario por ID
+    $user = User::find($request->id);
+
+    if (!$user) {
+        return response()->json(['message' => 'Usuario no encontrado.'], 404);
+    }
+
+    // Verificar si el correo ya está verificado
+    if ($user->email_verified_at) {
+        return response()->json(['message' => 'El correo ya está verificado.'], 200);
+    }
+
     // Verificar el código de verificación
     if ($user->codigo_verificacion != $request->codigo_verificacion) {
         return response()->json(['message' => 'Código de verificación incorrecto.'], 400);
     }
 
-    // Código correcto, iniciar sesión.
-    // Verificar el correo
-    $user->email_verified_at = now(); // Asegurarte de que el campo email_verified_at se rellene
+    // Código correcto, verificar el correo
+    $user->email_verified_at = now();
     $user->save();
-    $token = $user->createToken('Token')->plainTextToken;
-    return response()->json([
-        'token' => $token,
-        'rol' => $user->rol
-    ]);
+
+    return response()->json(['message' => 'Correo verificado con éxito.'], 200);
 }
+
 
 public function verifyEmail(Request $request)
 {

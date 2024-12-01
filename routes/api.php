@@ -52,12 +52,9 @@ Route::get('/verify-email/{id}/{hash}', [VerificationController::class, 'verify'
 Route::post('/email/resend', [VerificationController::class, 'resend'])
     ->name('verification.resend');
 
-
-
-
-
 Route::post('/registerU', [UserController::class, 'registerU']);
 Route::post('/login', [UserController::class, 'login']);
+Route::post('/verificarCorreo', [UserController::class, 'verificarCorreo']);
 Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/detallesUsuario', [UserController::class, 'verDetallesUsuario']);
 Route::post('/listaUsuarios', [UserController::class, 'listaUsuarios']);
