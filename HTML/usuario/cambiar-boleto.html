@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Compra</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #FFF;
+      color: #333;
+    }
+
+ /* Header */
+ .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #FCF0E3;
+}
+
+.header img {
+  max-width: 100px;
+  margin-right: auto;
+  padding: 0px 100px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* Dropdown Menu para Boletos */
+.dropdown {
+  position: relative;
+}
+
+.dropbtn {
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  z-index: 1000;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Botón de cerrar sesión */
+.logout-button {
+  background-color: #f28b82;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+}
+
+.logout-button:hover {
+  background-color: #e57373;
+}
+
+
+    /* Main Form */
+    form {
+      max-width: 800px;
+      margin: 30px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    form h2 {
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      color: #D21F26;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #D21F26;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #b7181e;
+    }
+
+    /* Seat Map */
+    .bus {
+      margin-top: 30px;
+    }
+
+    .seat-map {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .seat {
+      width: 40px;
+      height: 40px;
+      background-color: #ddd;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .seat.selected {
+      background-color: #D21F26;
+      color: #fff;
+    }
+
+    .seat img {
+      width: 100%;
+    }
+
+    /* Payment and Extras */
+    .extras {
+      margin-top: 30px;
+    }
+
+    .extras li {
+      margin-bottom: 10px;
+    }
+
+    .extras p {
+      font-size: 0.9rem;
+      color: #666;
+    }
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  padding: 50px;
+  text-align: center;
+  border-radius: 10px;
+  width: 500px;;
+}
+
+.modal-content p {
+  color: #388e3c;
+}
+
+.modal-content button {
+  margin-top: 10px;
+  background-color: #388e3c;
+}
+    /* Footer */
+    footer {
+      margin-top: 30px;
+      padding: 10px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+      border-top: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+    <div class="header">
+        <img src="../ADO-Autobuses-de-Oriente-Logo-700x394.png" alt="ADO Logo">
+        <div class="nav-links">
+          <a href="../usuario/inicio.html">Inicio</a>
+      
+          <!-- Menú desplegable para Boletos -->
+          <div class="dropdown">
+            <a href="#" class="dropbtn">Boletos</a>
+            <div class="dropdown-content">
+                <a href="../sesion/compra de boleto.html">Comprar boleto</a>
+                <a href="../usuario/cambiar-boleto.html">Cambiar boleto</a>
+                <a href="../usuario/cancelar-boleto.html">Cancelar boleto</a>
+                <a href="../usuario/ver-boleto.html">Ver boleto</a>
+            </div>
+          </div>
+      
+          <!-- Enlace simple para Perfil -->
+        
+          <a href="../usuario/corridas.html">Corridas</a>  <a href="../usuario/perfil.html">Perfil</a>
+      
+          <a href="../index.html" class="logout-button">Cerrar Sesión</a>
+      </div>  </div>
+      
+  
+  <!-- Formulario de Compra -->
+  <form id="ticketForm">
+
+    <h2>Cambiar boleto</h2>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre">
+
+    <label for="apellidos">Apellidos:</label>
+    <input type="text" id="apellidos" name="apellidos">
+
+    <label for="tipo_boleto">Tipo de boleto:</label>
+    <select id="tipo_boleto" name="tipo_boleto">
+      <option value="directo">Directo</option>
+      <option value="intermedio">Intermedio</option>
+    </select>
+
+    <!-- Mapa de Asientos -->
+                <div class="bus">
+                <h2>Selecciona tu asiento</h2>
+                <table>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th>ㅤ</th>
+                      
+                      <th> </th>
+                      <th> </th>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="seat" data-seat="A20"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A19"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A18"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A17"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A16"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A15"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A14"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A13"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A12"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A11"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                    <td> 
+                        <div class="seat" data-seat="A10"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A9"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A8"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A7"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A6"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A5"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A4"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A3"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A2"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A1"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                    </td>
+                    <td> 
+                    </td>
+                    <td> 
+                        <div class="seat" data-seat="A40"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A39"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A38"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A37"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A36"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A35"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A34"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A33"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A32"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A31"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                    </td>
+                    <td> 
+                        <div class="seat" data-seat="A30"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A29"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A28"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A27"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A26"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A25"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A24"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A23"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A22"><img src="../sesion/imgs/asientp" width="20px"  text-align="center"></div>
+                        <div class="seat" data-seat="A21"><img src="imgs/asientp" width="20px"  text-align="center"></div>
+                    </td>
+                           
+                <div class="seat-map">
+                    <div class="row">
+                        <div class="seat-map">
+                    <div class="row">
+                        <button type="button" id="seleccionar">Seleccionar Asiento</button>         
+                       
+                    
+                  </table>
+                  
+
+    <!-- Extras -->
+    <div class="extras">
+      <h3>Extras</h3>
+      <ul>
+        <li>
+          <label><input type="checkbox"> WiFi</label>
+          <p>Disfruta de conexión WiFi durante tu viaje.</p>
+        </li>
+        <li>
+          <label><input type="checkbox"> Seguro</label>
+          <p>Adquiere un seguro de viaje.</p>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Pago -->
+    <h3>Detalles de pago</h3>
+    <p>Total: <span id="total">$0.00</span></p>
+    <label>
+      <input type="checkbox" id="terminos"> Acepto los términos y condiciones
+    </label>
+
+    <button type="submit">Cambiar Boleto</button>
+  </form>
+
+
+  <!-- Footer -->
+  <footer>
+    © 2024 ADO - Todos los derechos reservados.
+  </footer>
+
+  <!-- Script para Selección de Asientos -->
+  <script>
+    const seats = document.querySelectorAll('.seat');
+    const seleccionarBtn = document.getElementById('seleccionar');
+    let selectedSeat = null;
+
+    seats.forEach(seat => {
+      seat.addEventListener('click', () => {
+        if (selectedSeat) {
+          selectedSeat.classList.remove('selected');
+        }
+        seat.classList.add('selected');
+        selectedSeat = seat;
+      });
+    });
+
+    seleccionarBtn.addEventListener('click', () => {
+      if (selectedSeat) {
+        alert(`Has seleccionado el asiento: ${selectedSeat.dataset.seat}`);
+      } else {
+        alert('Por favor, selecciona un asiento.');
+      }
+    });
+  </script> 
+   <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <p>Boleto cambiado</p>
+      <button id="closeModal">Cerrar</button>
+    </div>
+  </div>
+  
+  <script>
+    document.getElementById("ticketForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+  
+      // Mostrar el modal
+      const modal = document.getElementById("modal");
+      modal.classList.remove("hidden");
+    });
+  
+    document.getElementById("closeModal").addEventListener("click", function() {
+      // Ocultar el modal
+      const modal = document.getElementById("modal");
+      modal.classList.add("hidden");
+  
+      // Redirigir a otra pantalla
+      window.location.href = "../usuario/inicio.html"; // Cambia la ruta a la página deseada
+    });
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selecciona tu boleto</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+}
+
+ /* Header */
+ .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #FCF0E3;
+}
+
+.header img {
+  max-width: 100px;
+  margin-right: auto;
+  padding: 0px 100px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* Dropdown Menu para Boletos */
+.dropdown {
+  position: relative;
+}
+
+.dropbtn {
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  z-index: 1000;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Botón de cerrar sesión */
+.logout-button {
+  background-color: #f28b82;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+}
+
+.logout-button:hover {
+  background-color: #e57373;
+}
+
+
+main {
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  display: grid;
+  gap: 15px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+input, button {
+  padding: 10px;
+  font-size: 16px;
+}
+
+button.search-button {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.results {
+  margin-top: 30px;
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 15px 0;
+}
+
+
+.card h3 {
+  margin: 0 0 10px;
+}
+
+.card button {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+</style>
+<body>
+    <div class="header">
+        <img src="../ADO-Autobuses-de-Oriente-Logo-700x394.png" alt="ADO Logo">
+        <div class="nav-links">
+          <a href="../usuario/inicio.html">Inicio</a>
+      
+          <!-- Menú desplegable para Boletos -->
+          <div class="dropdown">
+            <a href="#" class="dropbtn">Boletos</a>
+            <div class="dropdown-content">
+                <a href="../sesion/compra de boleto.html">Comprar boleto</a>
+                <a href="../usuario/cambiar-boleto.html">Cambiar boleto</a>
+                <a href="../usuario/cancelar-boleto.html">Cancelar boleto</a>
+                <a href="../usuario/ver-boleto.html">Ver boleto</a>
+            </div>
+          </div>
+      
+          <!-- Enlace simple para Perfil -->
+          <a href="../usuario/corridas.html">Corridas</a>  <a href="../usuario/perfil.html">Perfil</a>
+      
+     
+          <a href="../index.html" class="logout-button">Cerrar Sesión</a>
+      </div>  </div>
+      
+  
+  <main>
+    <section class="form-section">
+      <h1>Selecciona tu boleto</h1>
+      <form action="#" method="GET">
+        <label for="from">¿Desde dónde?</label>
+        <input type="text" id="from" name="from" placeholder="Valor">
+
+        <label for="to">¿A dónde?</label>
+        <input type="text" id="to" name="to" placeholder="Valor">
+
+        <label for="departure">Fecha de salida</label>
+        <input type="date" id="departure" name="departure">
+
+        <label for="arrival">Fecha de llegada</label>
+        <input type="date" id="arrival" name="arrival">
+
+        <label for="passengers">Pasajeros</label>
+        <input type="number" id="passengers" name="passengers" placeholder="Valor">
+
+        <label>
+          <input type="checkbox" id="round_trip" name="round_trip"> Boleto redondo
+        </label>
+
+        <button type="submit" class="search-button">Buscar</button>
+      </form>
+    </section>
+
+    <section id="results" class="results hidden">
+      <h2>Elige ida</h2>
+      <div class="card">
+        <h3>Title</h3>
+        <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
+        <button>Button</button>
+      </div>
+      <div class="card">
+        <h3>Title</h3>
+        <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
+        <button>Button</button>
+      </div>
+
+      <h2>Elige regreso</h2>
+      <div class="card">
+        <h3>Title</h3>
+        <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
+        <button>Button</button>
+      </div>
+      <div class="card">
+        <h3>Title</h3>
+        <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
+        <button>Button</button>
+      </div>
+    </section>
+  </main>
+
+  <script>document.addEventListener("DOMContentLoaded", () => {
+    const roundTripCheckbox = document.getElementById("round_trip");
+    const resultsSection = document.getElementById("results");
+  
+    roundTripCheckbox.addEventListener("change", () => {
+      if (roundTripCheckbox.checked) {
+        resultsSection.classList.remove("hidden");
+      } else {
+        resultsSection.classList.add("hidden");
+      }
+    });
+  });
+  </script>
+</body>
+</html>
