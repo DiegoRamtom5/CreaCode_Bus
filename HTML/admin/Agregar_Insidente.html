@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Incidentes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="main">
+    <section class="incidentes">
+      <h1 class="incidentes__title">Lista de Incidentes</h1>
+      <button id="agregarIncidenteBtn" class="incidentes__agregar-btn">Agregar Incidente</button>
+      <div class="table-container">  
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Descripción</th>
+              <th>Fecha</th>
+              <th>Ubicación</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Choque leve en la carretera</td>
+              <td>2023-10-26</td>
+              <td>Km 25, Carretera México-Puebla</td>
+              <td>
+                <button class="data-table__button data-table__button--edit">Editar</button>
+                <button class="data-table__button data-table__button--delete">Eliminar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Retraso por manifestación</td>
+              <td>2023-10-25</td>
+              <td>Entrada a la Ciudad de México</td>
+              <td>
+                <button class="data-table__button data-table__button--edit">Editar</button>
+                <button class="data-table__button data-table__button--delete">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="agregarIncidenteForm" class="incidentes__form-container" style="display: none;">
+        <form class="incidentes__form">
+          <label for="descripcion">Descripción:</label>
+          <textarea id="descripcion" name="descripcion" required></textarea>
+          <label for="fecha">Fecha:</label>
+          <input type="date" id="fecha" name="fecha" required>
+          <label for="ubicacion">Ubicación:</label>
+          <input type="text" id="ubicacion" name="ubicacion" required>
+          <button type="submit" class="incidentes__guardar-btn">Guardar</button>
+        </form>
+      </div>
+    </section>
+  </main>
+  <script >
+    document.addEventListener('DOMContentLoaded', function() {
+  const agregarIncidenteBtn = document.getElementById('agregarIncidenteBtn');
+  const agregarIncidenteForm = document.getElementById('agregarIncidenteForm');
+
+  agregarIncidenteBtn.addEventListener('click', function() {
+    agregarIncidenteForm.style.display = 'block';
+  });
+
+  agregarIncidenteForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Obtener los valores del formulario
+    const descripcion = document.getElementById('descripcion').value;
+    const fecha = document.getElementById('fecha').value;
+    const ubicacion = document.getElementById('ubicacion').value;
+
+    // Crear una nueva fila en la tabla
+    const newRow = document.createElement('tr');
+    newRow.innerHTML = `
+      <td>${document.querySelectorAll('.data-table tbody tr').length + 1}</td>
+      <td>${descripcion}</td>
+      <td>${fecha}</td>
+      <td>${ubicacion}</td>
+      <td>
+        <button class="data-table__button data-table__button--edit">Editar</button>
+        <button class="data-table__button data-table__button--delete">Eliminar</button>
+      </td>
+    `;
+
+    // Agregar la nueva fila a la tabla
+    document.querySelector('.data-table tbody').appendChild(newRow);
+
+    // Limpiar el formulario y ocultarlo
+    document.getElementById('descripcion').value = '';
+    document.getElementById('fecha').value = '';
+    document.getElementById('ubicacion').value = '';
+    agregarIncidenteForm.style.display = 'none';
+  });
+});
+  </script>
+</body>
+</html>

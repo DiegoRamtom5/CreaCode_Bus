@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuarios</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header class="header">
+        <img class="header__logo" src="../ADO-Autobuses-de-Oriente-Logo-700x394.png" alt="ADO Logo">
+        <nav class="nav">
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a class="nav__link" href="index1.html">Inicio</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="../sesion/login.html">Cerrar Sesión</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="user-table">
+            <h2 class="user-table__title">Lista de Usuarios</h2>
+            <table class="user-table__data">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido Paterno</th>
+                        <th>Apellido Materno</th>
+                        <th>Correo Electrónico</th>
+                        <th>Número Telefónico</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Usuario #1</td>
+                        <td>Apellido1</td>
+                        <td>Apellido2</td>
+                        <td>usuario1@example.com</td>
+                        <td>1234567890</td>
+                        <td class="user-table__actions">
+                            <button class="user-table__button user-table__button--edit">Editar</button>
+                            <button class="user-table__button user-table__button--delete">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Usuario #2</td>
+                        <td>Apellido3</td>
+                        <td>Apellido4</td>
+                        <td>usuario2@example.com</td>
+                        <td>9876543210</td>
+                        <td class="user-table__actions">
+                            <button class="user-table__button user-table__button--edit">Editar</button>
+                            <button class="user-table__button user-table__button--delete">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Usuario #3</td>
+                        <td>Apellido5</td>
+                        <td>Apellido6</td>
+                        <td>usuario3@example.com</td>
+                        <td>1122334455</td>
+                        <td class="user-table__actions">
+                            <button class="user-table__button user-table__button--edit">Editar</button>
+                            <button class="user-table__button user-table__button--delete">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>

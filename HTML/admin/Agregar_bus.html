@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Autobús</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header class="header">
+        <img class="header__logo" src="../ADO-Autobuses-de-Oriente-Logo-700x394.png" alt="ADO Logo">
+        <nav class="nav">
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a class="nav__link" href="index1.html">Inicio</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="../sesion/login.html">Cerrar Sesión</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="form">
+            <h2 class="form__title">Agregar Autobús</h2>
+            <form class="form__content" id="autobusForm">
+                <div class="form__group">
+                    <label for="id" class="form__label">ID del Autobús:</label>
+                    <input type="text" id="id" class="form__input" placeholder="ID del autobús" required />
+                </div>
+                <div class="form__group">
+                    <label for="numero" class="form__label">Número del Autobús:</label>
+                    <input type="text" id="numero" class="form__input" placeholder="Número del autobús" required />
+                </div>
+                <div class="form__group">
+                    <label for="capacidad" class="form__label">Capacidad:</label>
+                    <input type="number" id="capacidad" class="form__input" placeholder="Capacidad del autobús" required />
+                </div>
+                <div class="form__group">
+                    <label for="servicios" class="form__label">Servicios:</label>
+                    <input type="text" id="servicios" class="form__input" placeholder="Servicios del autobús" required />
+                </div>
+                <div class="form__group">
+                    <label for="incidentes" class="form__label">Número de Incidentes:</label>
+                    <input type="number" id="incidentes" class="form__input" placeholder="Número de incidentes" required />
+                </div>
+                <div class="form__group">
+                    <label for="estado" class="form__label">Estado:</label>
+                    <select id="estado" class="form__select" required>
+                        <option value="activo">Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                    </select>
+                </div>
+                <button type="submit" class="form__button">Guardar Autobús</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
