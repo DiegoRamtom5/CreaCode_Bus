@@ -23,7 +23,7 @@ Route::post('/corrida/update', [CorridaController::class, 'update']);
 Route::post('/corrida/delete', [CorridaController::class, 'delete']);
 Route::post('/corrida/view', [CorridaController::class, 'view']);
 Route::post('/corrida/detalles', [CorridaController::class, 'detallesCorrida']);
-
+Route::post('/corrida/search', [CorridaController::class, 'search']);
 
 Route::post('/comprar-boleto', [BoletoController::class, 'comprarBoleto']);
 Route::post('/cancelar-boleto', [BoletoController::class, 'cancelarBoleto']);
