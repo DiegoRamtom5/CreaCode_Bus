@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Corridas Guardadas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <img class="header__logo" src="../ADO-Autobuses-de-Oriente-Logo-700x394.png" alt="ADO Logo">
+    <nav class="nav">
+      <ul class="nav__list">
+    
+        <li class="nav__item">
+          <a class="nav__link" href="./menu.html">Inicio</a>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" href="./login.html">Cerrar Sesión</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main">
+    <section class="corridas">
+      <h2 class="corridas__title">Corridas Guardadas</h2>
+      <div class="corridas__container" id="corridasContainer">
+        </div>
+    </section>
+  </main>
+
+  <script>
+    const token = "1|2LkTFu9P2U7VazXJ3YEKXYX7OxnZeIhHK7lFhhBB7a7e4f00"; // Token fijo de ejemplo
+    const container = document.getElementById("corridasContainer");
+
+    function fetchCorridas() {
+      fetch("http://127.0.0.1:8000/api/corrida/view", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ token: token }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.corridas && data.corridas.length > 0) {
+          data.corridas.forEach((corrida, index) => {
+            // Resumen de los asientos
+            const totalAsientos = corrida.asientos.length;
+            const disponibles = corrida.asientos.filter(asiento => asiento.estado === "disponible").length;
+            const ocupados = totalAsientos - disponibles;
+
+            // Mostrar corrida con resumen de asientos
+            container.innerHTML += `
+              <div class="corridas__card">
+                <h3 class="corridas__card-title">Corrida ${index + 1}</h3>
+                <p class="corridas__card-text"><strong>Autobús:</strong> ${corrida.id_autobus}</p>
+                <p class="corridas__card-text"><strong>Origen:</strong> ${corrida.origen}</p>
+                <p class="corridas__card-text"><strong>Destino:</strong> ${corrida.destino}</p>
+                <p class="corridas__card-text"><strong>Fecha:</strong> ${corrida.fecha}</p>
+                <p class="corridas__card-text"><strong>Hora de salida:</strong> ${corrida.hora_salida}</p>
+                <p class="corridas__card-text"><strong>Hora estimada de llegada:</strong> ${corrida.hora_estima_llegada}</p>
+                <p class="corridas__card-text"><strong>Tipo de Corrida:</strong> ${corrida.tipo_corrida}</p>
+                <p class="corridas__card-text"><strong>Total Asientos:</strong> ${totalAsientos}</p>
+                <p class="corridas__card-text"><strong>Asientos Disponibles:</strong> ${disponibles}</p>
+                <p class="corridas__card-text"><strong>Asientos Ocupados:</strong> ${ocupados}</p>
+                <p class="corridas__card-text"><strong>Precio:</strong> $${corrida.precio}</p>
+              </div>
+            `;
+          });
+        } else {
+          container.innerHTML += "<p class='corridas__no-data'>No hay corridas disponibles.</p>";
+        }
+      })
+      .catch(error => {
+        console.error("Error al obtener las corridas:", error);
+        container.innerHTML += "<p class='corridas__error'>Ocurrió un error al cargar las corridas. Intenta nuevamente más tarde.</p>";
+      });
+    }
+
+    // Llamar a la función al cargar la página
+    fetchCorridas();
+  </script>
+</body>
+</html>
